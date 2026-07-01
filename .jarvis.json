@@ -1,0 +1,11 @@
+{
+  "id": "blobby",
+  "name": "Blobby",
+  "description": "A modern virtual pet — raise your pixel blob from egg to adult through daily check-ins, mini-games, and careful nurturing.",
+  "category": "games",
+  "status": { "prod": "in_progress", "dev": "live" },
+  "deploy": {
+    "prod": { "url": "https://blobby.dabrewer.dev/" },
+    "dev":  { "url": "https://blobby.dabrewer.dev/dev/" }
+  }
+}

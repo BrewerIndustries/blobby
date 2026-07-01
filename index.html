@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Blobby</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="device">
+
+      <div id="header">
+        <div id="header-left">
+          <div id="creature-name">BLOBBY</div>
+          <div id="creature-form-name"></div>
+        </div>
+        <div id="header-right">
+          <div id="day-counter">DAY 0</div>
+          <div id="gen-counter">GEN 1</div>
+        </div>
+        <button id="collection-btn" title="Collection">📋</button>
+      </div>
+
+      <div id="screen">
+        <div id="screen-inner">
+          <canvas id="creature-canvas" width="160" height="160"></canvas>
+          <div id="evo-flash">
+          <div class="evo-label">✨ EVOLVED INTO ✨</div>
+          <div class="evo-name" id="evo-name"></div>
+          <div class="evo-stars">★★★</div>
+        </div>
+        <div id="status-icons">
+            <span id="icon-poop"  class="status-icon hidden" title="Clean me!">💩</span>
+            <span id="icon-sick"  class="status-icon hidden" title="I'm sick!">🤒</span>
+            <span id="icon-attn"  class="status-icon hidden" title="Attention!">❗</span>
+            <span id="icon-sleep" class="status-icon hidden" title="Sleeping">💤</span>
+          </div>
+        </div>
+        <div id="screen-message"></div>
+      </div>
+
+      <div id="stats-panel">
+        <div class="stat-row">
+          <span class="stat-lbl">HUNGER</span>
+          <div class="hearts" id="hunger-hearts"></div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-lbl">HAPPY</span>
+          <div class="hearts" id="happy-hearts"></div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-lbl">HEALTH</span>
+          <div class="hearts" id="health-hearts"></div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-lbl">DISC</span>
+          <div class="bar-wrap">
+            <div class="bar-fill" id="disc-bar"></div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-lbl">WEIGHT</span>
+          <span class="stat-val" id="weight-val">5</span>
+          <span id="weight-badge" class="healthy">HEALTHY</span>
+        </div>
+      </div>
+
+      <div id="action-buttons">
+        <button class="act-btn" id="btn-feed"       data-tip="Feed">🍖</button>
+        <button class="act-btn" id="btn-play"       data-tip="Play">🎮</button>
+        <button class="act-btn" id="btn-clean"      data-tip="Clean">🚿</button>
+        <button class="act-btn" id="btn-medicine"   data-tip="Medicine">💊</button>
+        <button class="act-btn" id="btn-discipline" data-tip="Discipline">⚡</button>
+        <button class="act-btn" id="btn-lights"     data-tip="Lights">💡</button>
+      </div>
+
+    </div><!-- /device -->
+
+    <!-- ─── Feed menu ─── -->
+    <div id="feed-overlay" class="overlay hidden">
+      <div class="popup">
+        <div class="popup-title">FEED BLOBBY</div>
+        <button class="menu-btn" data-food="meal">🍖 MEAL<span class="sub">keeps weight down</span></button>
+        <button class="menu-btn" data-food="snack">🍬 SNACK<span class="sub">tastier, gains weight</span></button>
+        <button class="menu-btn cancel" id="feed-cancel">CANCEL</button>
+      </div>
+    </div>
+
+    <!-- ─── Play menu ─── -->
+    <div id="play-overlay" class="overlay hidden">
+      <div class="popup">
+        <div class="popup-title">MINI-GAMES</div>
+        <button class="menu-btn" data-game="startap">⭐ STAR TAP</button>
+        <button class="menu-btn" data-game="memory">🃏 MEMORY MATCH</button>
+        <button class="menu-btn" data-game="rps">✊ ROCK PAPER SCISSORS</button>
+        <button class="menu-btn" data-game="rhythm">🎵 RHYTHM TAP</button>
+        <button class="menu-btn" data-game="numguess">🔢 NUMBER GUESS</button>
+        <button class="menu-btn cancel" id="play-cancel">CANCEL</button>
+      </div>
+    </div>
+
+    <!-- ─── Mini-game screen ─── -->
+    <div id="minigame-overlay" class="overlay hidden">
+      <div class="popup wide">
+        <div class="popup-header">
+          <span id="mg-title">STAR TAP</span>
+          <button id="mg-close">✕</button>
+        </div>
+        <canvas id="mg-canvas" width="280" height="200"></canvas>
+        <div id="mg-ui"></div>
+        <div id="mg-result" class="hidden"></div>
+      </div>
+    </div>
+
+    <!-- ─── Creature card ─── -->
+    <div id="card-overlay" class="overlay hidden">
+      <div class="popup">
+        <div class="popup-title">✨ CREATURE CARD ✨</div>
+        <canvas id="card-canvas" width="200" height="280"></canvas>
+        <div id="card-info"></div>
+        <button class="menu-btn" id="card-save">💾 SAVE TO COLLECTION</button>
+        <button class="menu-btn" id="card-hatch">🥚 HATCH EGG</button>
+      </div>
+    </div>
+
+    <!-- ─── Collection ─── -->
+    <div id="collection-overlay" class="overlay hidden">
+      <div class="popup wide">
+        <div class="popup-title">📋 COLLECTION</div>
+        <div id="cards-grid"></div>
+        <button class="menu-btn cancel" id="collection-close">CLOSE</button>
+      </div>
+    </div>
+
+  </div><!-- /app -->
+
+  <script src="js/engine.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/minigames.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
