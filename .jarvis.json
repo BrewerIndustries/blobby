@@ -3,6 +3,7 @@
   "name": "Blobby",
   "description": "A modern virtual pet — raise your pixel blob from egg to adult through daily check-ins, mini-games, and careful nurturing.",
   "category": "games",
+  "tech": ["Vanilla JS (ES modules)", "Canvas 2D", "CSS", "localStorage", "GitHub Pages"],
   "status": { "prod": "in_progress", "dev": "in_progress" },
   "deploy": {
     "prod": { "url": "https://blobby.dabrewer.dev/" },
