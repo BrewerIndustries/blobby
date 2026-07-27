@@ -108,6 +108,7 @@ function randomPoopDelay() { return hoursMs(2 + Math.random() * 4); } // 2–6 h
 function saveState(state) {
   state.time.lastSave = Date.now();
   localStorage.setItem('blobby_state', JSON.stringify(state));
+  if (window.Arcade) { Arcade.report('care', (state.creature&&state.creature.careScore)||0); Arcade.report('days', (state.time&&state.time.daysBorn)||0); }
 }
 
 function loadState() {
